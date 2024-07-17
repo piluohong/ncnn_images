@@ -2,13 +2,17 @@
 
 void corner_tracking::update(const cv::Mat& score, const cv::Mat& desc) {
 
-    if (trackedPoints.empty()) {// first frame
+    // first frame
+    if (trackedPoints.empty()) 
+    {
         trackedPoints = extractFeature(score);
         trackedPointsHistory.resize(trackedPoints.size());
         for (size_t i = 0; i < trackedPoints.size(); i++) {
             trackedPointsHistory[i].push_back(trackedPoints[i]);
         }
-    } else {
+    } 
+    else 
+    {
         std::vector<cv::Point2f> trackedPointsNew;
         std::vector<uchar> status;
         std::vector<float> err;
@@ -54,15 +58,17 @@ void corner_tracking::show(cv::Mat &img, cv::Mat &mat_out) {
     for (auto& p : trackedPoints) {
         cv::circle(img, p, 2, cv::Scalar(0, 255, 0), -1);
     }
+
     for (auto& history : trackedPointsHistory) {
         for (size_t i = 1; i < history.size(); i++) {
-            cv::line(img, history[i - 1], history[i], cv::Scalar(0, 0, 255), 1);
+            cv::line(img, history[i - 1], history[i], cv::Scalar(255, 0, 0), 1);
         }
     }
     // cv::imshow("tracking", img);
     mat_out = img;
 }
 
+// 提取特征点
 std::vector<cv::Point2f> corner_tracking::extractFeature(
         const cv::Mat& score,
         int ncellsize,
