@@ -39,7 +39,7 @@ class ncnn_image
          net.opt.num_threads=8;
          net.load_param("/home/hhh/project_hhh/temp/slam/lvio/src/ncnn_images/models/model.param");
          net.load_model("/home/hhh/project_hhh/temp/slam/lvio/src/ncnn_images/models/model.bin");
-         cam_sub = nh.subscribe<sensor_msgs::CompressedImage>("/camera/image_color/compressed",1000, &ncnn_image::ImageCBK,this);
+         cam_sub = nh.subscribe<sensor_msgs::CompressedImage>("/camera/image_raw/compressed",1000, &ncnn_image::ImageCBK,this);
          ncnn_grayimage_feats_pub = nh.advertise<sensor_msgs::Image>("/ncnn_grayimage_feats",100);
          image_feats_pub = nh.advertise<sensor_msgs::Image>("/image_feats",100);
          ncnn_descimage_pub = nh.advertise<sensor_msgs::Image>("/ncnn_descimage_feats",100);

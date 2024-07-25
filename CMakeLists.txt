@@ -16,6 +16,7 @@ set(ncnn_DIR "/home/hhh/3rdpartty/ncnn/build/install/lib/cmake/ncnn" CACHE PATH 
 
 find_package(OpenCV REQUIRED)
 find_package(ncnn REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
@@ -23,6 +24,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   std_msgs
+  nav_msgs
 )
 
 
@@ -148,6 +150,9 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(ncnn_image_node src/image_node.cpp include/tracking.cpp)
 target_link_libraries(ncnn_image_node ${catkin_LIBRARIES} ${OpenCV_LIBS} ncnn -fopenmp)
+
+add_executable(imu_ekf_node src/imu_ekf_node.cpp)
+target_link_libraries(imu_ekf_node ${catkin_LIBRARIES} -fopenmp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
