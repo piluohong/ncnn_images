@@ -98,8 +98,6 @@ public:
         }
 
         Eigen::Vector3d z_axis = accel_avg / accel_avg.norm();
-        // std::cout << MAGENTA << "[accel_avg] " << accel_avg.transpose() << RESET << std::endl;
-        // std::cout << MAGENTA << "[z_axis] " << z_axis.transpose() << RESET << std::endl;
         Eigen::Vector3d e_1(1, 0, 0);
         Eigen::Vector3d x_axis = e_1 - z_axis * z_axis.transpose() * e_1;
         x_axis = x_axis / x_axis.norm();
